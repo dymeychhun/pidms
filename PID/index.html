@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PID Microsoft</title>
+</head>
+<body>
+<textarea id="key" cols="15" rows="20"></textarea>
+<button id="btncheck">check</button>
+<textarea id="result" cols="15" rows="20"></textarea>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#btncheck').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		var productKey = $('#key').val().trim();
+		var url = 'https://kichhoat24h.com/user-api/check-key?keys='+productKey+'&token=VLbuvBpvUW1XZUJaay8vbDBiMGc3Yzg3Q1AvSWlCeGkrQmF3MGZsMUdkRVNieTFKaz0&mode=0';
+	$.get(url, function(data) {
+		console.log(data.data);
+		var res = '';
+		for (var i = 0; i < data.data.length; i++) {
+			var result = data.data[i].response_message;
+			$('#result').text(res+=`Key: ${data.data[i].key}\nDescription: ${data.data[i].prd}\nSub Type: ${data.data[i].sub}\nError Code: ${data.data[i].errorCode}\nTime: ${data.data[i].time}\n\n`);
+		}
+	});
+
+	});
+});
+
+</script>
+</body>
+</html>
